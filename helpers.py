@@ -16,12 +16,10 @@ def position(x = 0, y = 0):
     Returns:
     number -- итоговая позиция светодиода
     """
-    # return int(x * 14 + y) if not x % 2 else int((x - ((x-1)/2)) * 14 * 2 - 1 - y)
-    # return int(x * LED_HEIGHT + (LED_HEIGHT - 1) - y)
-    return int((x - ((x-1)/2)) * LED_HEIGHT * 2 - 1 - y)
+    return int(x * LED_HEIGHT + (LED_HEIGHT - 1) - y) if not x % 2 else int(LED_HEIGHT * x + y)
 
 def genereta_line(panel, x):
     for i in range(0, LED_HEIGHT, 1):
         # print(i)
-        panel.setPixelColor(position(x, i), Color(150, 0, 0))
+        panel.setPixelColor(position(x, i), Color(150, 90, 0))
         panel.show()

@@ -18,8 +18,16 @@ def position(x = 0, y = 0):
     """
     return int(x * LED_HEIGHT + (LED_HEIGHT - 1) - y) if not x % 2 else int(LED_HEIGHT * x + y)
 
-def genereta_line(panel, x):
+def generate_color():
+    return Color(255, 90, 0)
+
+def generate_line(panel, x, max_height):
+    #  сначала очищаем линию по всей высоте
     for i in range(0, LED_HEIGHT, 1):
-        # print(i)
-        panel.setPixelColor(position(x, i), Color(150, 90, 0))
-        panel.show()
+        panel.setPixelColor(position(x, i), Color(0, 0, 0))
+
+    # затем ее перерисовываем
+    for i in range(0, max_height, 1):
+        panel.setPixelColor(position(x, i), generate_color())
+
+    panel.show()

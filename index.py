@@ -1,25 +1,27 @@
 import time
 import datetime
+import random
 
 from rpi_ws281x import Adafruit_NeoPixel, Color
 
-from helpers import position, genereta_line
+from helpers import position, generate_line
 
 LED_WIDTH = 18
 LED_HEIGHT = 14
+TIME_SLEEP = 0.001
 
 LED_COUNT = 252
 LED_PIN = 18
-LED_FREQ_HZ = 800000
+LED_FREQ_HZ = 900000
 LED_DMA = 10
 LED_BRIGHTNESS = 2
 LED_INVERT = False
 
 def loop(panel):
-    for i in range(0, panel.numPixels(), 1):
-        panel.setPixelColor(i, Color(170, 170, 170))
-        time.sleep(0.1)
-        panel.show()
+    for i in range(0, LED_WIDTH, 1):
+        generate_line(panel, i, int(random.uniform(1, LED_HEIGHT)))
+
+    time.sleep(TIME_SLEEP)
 
 if __name__ == '__main__':
     panel = Adafruit_NeoPixel(
@@ -33,32 +35,5 @@ if __name__ == '__main__':
 
     panel.begin()
 
-    # for i in range(0, panel.numPixels(), 1):
-        # panel.setPixelColor(i, Color(0, 100, 0))
-        # panel.show()
-    # while True:
-    genereta_line(panel, 0)
-    genereta_line(panel, 2)
-    genereta_line(panel, 4)
-    genereta_line(panel, 6)
-    genereta_line(panel, 8)
-    genereta_line(panel, 10)
-    genereta_line(panel, 12)
-    genereta_line(panel, 14)
-    genereta_line(panel, 16)
-
-    genereta_line(panel, 1)
-    genereta_line(panel, 3)
-    genereta_line(panel, 5)
-    genereta_line(panel, 7)
-    genereta_line(panel, 9)
-    genereta_line(panel, 11)
-    genereta_line(panel, 13)
-    genereta_line(panel, 15)
-    genereta_line(panel, 17)
-    # panel.show()
-    # genereta_line(panel, 18)
-        # genereta_line(panel, LED_HEIGHT, 1)
-        # genereta_line(panel, LED_HEIGHT, 9)
-    
-        # time.sleep(0.1)
+    while True:
+        loop(panel)

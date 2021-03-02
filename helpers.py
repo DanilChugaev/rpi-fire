@@ -3,6 +3,10 @@ from rpi_ws281x import Color
 LED_WIDTH = 18
 LED_HEIGHT = 14
 
+COLOR_RED = Color(100,0,0)
+COLOR_ORANGE = Color(200,100,0)
+COLOR_YELLOW = Color(255,255,0)
+
 def position(x = 0, y = 0):
     """
     Определяет местоположение светодиода по указанным координатам
@@ -18,8 +22,15 @@ def position(x = 0, y = 0):
     """
     return int(x * LED_HEIGHT + (LED_HEIGHT - 1) - y) if not x % 2 else int(LED_HEIGHT * x + y)
 
-def generate_color():
-    return Color(255, 90, 0)
+def generate_color(max_height, led_position):
+    delimiter = led_position / max_height
+
+    if delimiter < 2/6:
+        return COLOR_YELLOW
+    elif delimiter < 4/6:
+        return COLOR_ORANGE
+    else:
+        return COLOR_RED
 
 def generate_line(panel, x, max_height):
     #  сначала очищаем линию по всей высоте
@@ -28,6 +39,6 @@ def generate_line(panel, x, max_height):
 
     # затем ее перерисовываем
     for i in range(0, max_height, 1):
-        panel.setPixelColor(position(x, i), generate_color())
+        panel.setPixelColor(position(x, i), generate_color(max_height, i))
 
     panel.show()

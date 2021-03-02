@@ -14,12 +14,21 @@ LED_COUNT = 252
 LED_PIN = 18
 LED_FREQ_HZ = 900000
 LED_DMA = 10
-LED_BRIGHTNESS = 2
+LED_BRIGHTNESS = 90
 LED_INVERT = False
+
+MIN_HEIGHT = 3
+# создаем массив для хранения высот линий
+height_list = [MIN_HEIGHT] * LED_WIDTH
 
 def loop(panel):
     for i in range(0, LED_WIDTH, 1):
-        generate_line(panel, i, int(random.uniform(1, LED_HEIGHT)))
+        min_height = MIN_HEIGHT if height_list[i] - 3 <= MIN_HEIGHT else height_list[i] - 3
+        max_height = LED_HEIGHT if height_list[i] + 3 >= LED_HEIGHT else height_list[i] + 3
+        height = int(random.uniform(min_height, max_height))
+        height_list[i] = height
+
+        generate_line(panel, i, height)
 
     time.sleep(TIME_SLEEP)
 

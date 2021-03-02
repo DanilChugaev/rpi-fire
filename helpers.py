@@ -3,7 +3,7 @@ from rpi_ws281x import Color
 LED_WIDTH = 18
 LED_HEIGHT = 14
 
-COLOR_RED = Color(100,0,0)
+COLOR_RED = Color(255,0,0)
 COLOR_ORANGE = Color(200,100,0)
 COLOR_YELLOW = Color(255,255,0)
 

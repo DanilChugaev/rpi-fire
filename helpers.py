@@ -27,7 +27,7 @@ def generate_color(max_height, led_position):
 
     if delimiter < 2/6:
         return COLOR_YELLOW
-    elif delimiter < 4/6:
+    elif delimiter < 3/6:
         return COLOR_ORANGE
     else:
         return COLOR_RED
